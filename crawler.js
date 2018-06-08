@@ -36,8 +36,9 @@ var storeTag = storesDict[searchQuery];
 
 function formatDate(todayOrTomorrow) {
   var d = new Date();
-  var timezoneOffset = d.getTimezoneOffset() * 60000;
-  var today = new Date(d.getTime() + timezoneOffset);
+  var today = new Date(d.getTime() + 32400000); //+9 hours offset
+  //var timezoneOffset = d.getTimezoneOffset() * 60000;
+  //var today = new Date(d.getTime() + timezoneOffset);
   var day = ("0" + today.getDate()).slice(-2);
   var dPlus2 = new Date(today.getTime() + 86400000);
   var tomorrow = ("0" + dPlus2.getDate()).slice(-2);
@@ -54,8 +55,9 @@ function formatDate(todayOrTomorrow) {
 
 function stringDate(todayOrTomorrow) {
   var d = new Date();
-  var timezoneOffset = d.getTimezoneOffset() * 60000;
-  var today = new Date(d.getTime() + timezoneOffset);
+  var today = new Date(d.getTime() + 32400000); //+9 hours offset
+  //var timezoneOffset = d.getTimezoneOffset() * 60000;
+  //var today = new Date(d.getTime() + timezoneOffset);
   var day = ("0" + today.getDate()).slice(-2);
   var dPlus2 = new Date(today.getTime() + 86400000);
   var tomorrow = ("0" + dPlus2.getDate()).slice(-2);
