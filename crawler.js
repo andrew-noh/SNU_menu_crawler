@@ -2,6 +2,7 @@
 var request = require('request');
 
 // Variables
+// 전 단계에서 저장된 사용자 입력 변수를 연결
 var userDateInput = '내일'; // User input query
 var searchQuery = "학생회관 식당" // User input query
 
@@ -195,6 +196,7 @@ req({
     //console.log(stringDate(requestDate));
     //console.log(menuPresenter(body.store.menus));
     var outputText = searchQuery + '\n' + stringDate(requestDate) + '\n' + menuPresenter(body.store.menus);
+    // outputText 밴수를 챗봇 답변 변수로 변경
     console.log(outputText);
   }
 })
