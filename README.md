@@ -20,3 +20,5 @@ API: [API](https://bablabs.com/openapi/wiki)
   npm install request
 
 5) 코드 실행
+
+메인 코드: [crawler.js](crawler.js)
