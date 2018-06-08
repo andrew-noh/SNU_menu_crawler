@@ -36,11 +36,13 @@ var storeTag = storesDict[searchQuery];
 
 function formatDate(todayOrTomorrow) {
   var d = new Date();
-  var day = ("0" + d.getDate()).slice(-2);
-  var dPlus2 = new Date(d.getTime() + 86400000);
+  var timezoneOffset = d.getTimezoneOffset() * 60000;
+  var today = new Date(d.getTime() + timezoneOffset);
+  var day = ("0" + today.getDate()).slice(-2);
+  var dPlus2 = new Date(today.getTime() + 86400000);
   var tomorrow = ("0" + dPlus2.getDate()).slice(-2);
-  var month = ("0" + (d.getMonth() + 1)).slice(-2);
-  var year = d.getFullYear();
+  var month = ("0" + (today.getMonth() + 1)).slice(-2);
+  var year = today.getFullYear();
   if (todayOrTomorrow === 'today') {
     return year + '-' + month + '-' + day;
   } else if (todayOrTomorrow === 'tomorrow') {
@@ -52,11 +54,13 @@ function formatDate(todayOrTomorrow) {
 
 function stringDate(todayOrTomorrow) {
   var d = new Date();
-  var day = ("0" + d.getDate()).slice(-2);
-  var dPlus2 = new Date(d.getTime() + 86400000);
+  var timezoneOffset = d.getTimezoneOffset() * 60000;
+  var today = new Date(d.getTime() + timezoneOffset);
+  var day = ("0" + today.getDate()).slice(-2);
+  var dPlus2 = new Date(today.getTime() + 86400000);
   var tomorrow = ("0" + dPlus2.getDate()).slice(-2);
-  var month = ("0" + (d.getMonth() + 1)).slice(-2);
-  var year = d.getFullYear();
+  var month = ("0" + (today.getMonth() + 1)).slice(-2);
+  var year = today.getFullYear();
   if (todayOrTomorrow === 'today') {
     return year + '년 ' + month + '월 ' + day + '일\n';
   } else if (todayOrTomorrow === 'tomorrow') {
@@ -190,6 +194,9 @@ req({
       delete value.date;
       if (value.description === '#' || !value.description) {
         delete value.description;
+      }
+      if (value.name === '#' || !value.name) {
+        delete value.name;
       }
     });
     //console.log(searchQuery);
