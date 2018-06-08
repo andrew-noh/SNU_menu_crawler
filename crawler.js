@@ -3,7 +3,7 @@ var request = require('request');
 
 // Variables
 // 전 단계에서 저장된 사용자 입력 변수를 연결
-var userDateInput = '내일'; // User input query
+var userDateInput = '오늘'; // User input query
 var searchQuery = "학생회관 식당" // User input query
 
 
@@ -101,7 +101,7 @@ function menuPresenter(menuList) {
         var servingTime = getMenuTime(value.time);
         var menuName = value.name;
         var menuDescription = value.description;
-        if (value.price == 'undefined') {
+        if (!value.price) {
           var menuPrice = '-';
         } else {
           var menuPrice = value.price;
@@ -111,7 +111,7 @@ function menuPresenter(menuList) {
         // Case only description
         var servingTime = getMenuTime(value.time);
         var menuDescription = value.description;
-        if (value.price == 'undefined') {
+        if (!value.price) {
           var menuPrice = '-';
         } else {
           var menuPrice = value.price;
@@ -129,7 +129,7 @@ function menuPresenter(menuList) {
         menu_string = menu_string + servingTime + '\n' + menuName + ': ' + menuPrice + '원\n';
       }
     });
-    return menu_string;
+    return removeDuplicated(menu_string);
   } else {
     if (!!menuList.name == true && !!menuList.description == true) {
       // Case have both
@@ -164,7 +164,14 @@ function menuPresenter(menuList) {
       menu_string = menu_string + servingTime + '\n' + menuName + ': ' + menuPrice + '원\n';
     }
   }
-  return menu_string;
+  return removeDuplicated(menu_string);
+}
+
+function removeDuplicated(source_text) {
+  var temp_arr = source_text.split(/\r?\n/);
+  var new_set = new Set(temp_arr);
+  let array = Array.from(new_set);
+  return array.join('\n');
 }
 
 var dateReq = formatDate(requestDate);
